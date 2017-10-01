@@ -1,5 +1,6 @@
 # loadavg plugin for Mackerel
 ## Example
+![loadavg plugin](https://user-images.githubusercontent.com/375258/31051316-260ab04e-a6a0-11e7-92ab-dcd83e47b2c4.gif)
 
 ```
  $ mackerel-plugin-loadavg
