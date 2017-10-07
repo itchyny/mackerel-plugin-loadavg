@@ -10,13 +10,11 @@ pub struct LoadavgPlugin {}
 #[inline]
 fn get_loadavgs() -> Result<[f64; 3], String> {
     let mut loadavgs: [f64; 3] = [0.0, 0.0, 0.0];
-    unsafe {
-        let ret = libc::getloadavg(loadavgs.as_mut_ptr(), 3);
-        if ret != 3 {
-            Err("failed to get load averages".to_string())
-        } else {
-            Ok(loadavgs)
-        }
+    let ret = unsafe { libc::getloadavg(loadavgs.as_mut_ptr(), 3) };
+    if ret == 3 {
+        Ok(loadavgs)
+    } else {
+        Err("failed to get load averages".to_string())
     }
 }
 
