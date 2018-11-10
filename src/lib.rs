@@ -1,5 +1,4 @@
 extern crate libc;
-#[macro_use]
 extern crate mackerel_plugin;
 
 use std::collections::HashMap;
