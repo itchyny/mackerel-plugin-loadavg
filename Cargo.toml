@@ -9,8 +9,8 @@ license = "MIT"
 keywords = ["cli", "mackerel"]
 
 [dependencies]
-mackerel_plugin = "0.2"
-libc = "0.2"
+mackerel_plugin = "0.2.4"
+libc = "0.2.72"
 
 [[bin]]
 name = "mackerel-plugin-loadavg"
