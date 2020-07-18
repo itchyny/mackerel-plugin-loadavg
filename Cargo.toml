@@ -1,6 +1,6 @@
 [package]
 name = "mackerel_plugin_loadavg"
-version = "0.0.0"
+version = "0.1.0"
 authors = ["itchyny <itchyny@hatena.ne.jp>"]
 description = "Loadavg plugin for Mackerel"
 repository = "https://github.com/itchyny/mackerel-plugin-loadavg"
