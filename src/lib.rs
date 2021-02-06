@@ -1,8 +1,8 @@
 extern crate libc;
 extern crate mackerel_plugin;
 
-use std::collections::HashMap;
 use mackerel_plugin::*;
+use std::collections::HashMap;
 
 pub struct LoadavgPlugin {}
 
@@ -28,17 +28,15 @@ impl Plugin for LoadavgPlugin {
     }
 
     fn graph_definition(&self) -> Vec<Graph> {
-        vec![
-            graph! {
-                name: "loadavg",
-                label: "Load averages",
-                unit: "float",
-                metrics: [
-                    { name: "loadavg15", label: "loadavg15" },
-                    { name: "loadavg5", label: "loadavg5" },
-                    { name: "loadavg1", label: "loadavg1" },
-                ]
-            },
-        ]
+        vec![graph! {
+            name: "loadavg",
+            label: "Load averages",
+            unit: "float",
+            metrics: [
+                { name: "loadavg15", label: "loadavg15" },
+                { name: "loadavg5", label: "loadavg5" },
+                { name: "loadavg1", label: "loadavg1" },
+            ]
+        }]
     }
 }
