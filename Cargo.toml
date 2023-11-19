@@ -1,16 +1,17 @@
 [package]
 name = "mackerel_plugin_loadavg"
 version = "0.1.0"
-authors = ["itchyny <itchyny@hatena.ne.jp>"]
+authors = ["itchyny <itchyny@cybozu.co.jp>"]
 description = "Loadavg plugin for Mackerel"
 repository = "https://github.com/itchyny/mackerel-plugin-loadavg"
 readme = "README.md"
 license = "MIT"
 keywords = ["cli", "mackerel"]
+edition = "2021"
 
 [dependencies]
-mackerel_plugin = "0.2.4"
-libc = "0.2.72"
+mackerel_plugin = "0.2.6"
+libc = "0.2.150"
 
 [[bin]]
 name = "mackerel-plugin-loadavg"

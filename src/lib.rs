@@ -1,44 +1,31 @@
-extern crate libc;
-extern crate mackerel_plugin;
-
+use mackerel_plugin::{graph, Graph, Plugin};
 use std::collections::HashMap;
-use mackerel_plugin::*;
 
 pub struct LoadavgPlugin {}
 
-#[inline]
-fn get_loadavgs() -> Result<[f64; 3], String> {
-    let mut loadavgs: [f64; 3] = [0.0, 0.0, 0.0];
-    let ret = unsafe { libc::getloadavg(loadavgs.as_mut_ptr(), 3) };
-    if ret == 3 {
-        Ok(loadavgs)
-    } else {
-        Err("failed to get load averages".to_string())
-    }
-}
-
 impl Plugin for LoadavgPlugin {
     fn fetch_metrics(&self) -> Result<HashMap<String, f64>, String> {
-        let mut metrics = HashMap::new();
-        let loadavgs = get_loadavgs()?;
-        metrics.insert("loadavg.loadavg1".to_string(), loadavgs[0]);
-        metrics.insert("loadavg.loadavg5".to_string(), loadavgs[1]);
-        metrics.insert("loadavg.loadavg15".to_string(), loadavgs[2]);
-        Ok(metrics)
+        let mut loadavgs: [f64; 3] = [0.0, 0.0, 0.0];
+        if unsafe { libc::getloadavg(loadavgs.as_mut_ptr(), 3) } != 3 {
+            return Err("failed to get load averages".to_owned());
+        }
+        Ok(HashMap::from([
+            ("loadavg.loadavg1".to_owned(), loadavgs[0]),
+            ("loadavg.loadavg5".to_owned(), loadavgs[1]),
+            ("loadavg.loadavg15".to_owned(), loadavgs[2]),
+        ]))
     }
 
     fn graph_definition(&self) -> Vec<Graph> {
-        vec![
-            graph! {
-                name: "loadavg",
-                label: "Load averages",
-                unit: "float",
-                metrics: [
-                    { name: "loadavg15", label: "loadavg15" },
-                    { name: "loadavg5", label: "loadavg5" },
-                    { name: "loadavg1", label: "loadavg1" },
-                ]
-            },
-        ]
+        vec![graph! {
+            name: "loadavg",
+            label: "Load averages",
+            unit: "float",
+            metrics: [
+                { name: "loadavg15", label: "loadavg15" },
+                { name: "loadavg5", label: "loadavg5" },
+                { name: "loadavg1", label: "loadavg1" },
+            ],
+        }]
     }
 }
