@@ -2,12 +2,8 @@ use mackerel_plugin::Plugin;
 use mackerel_plugin_loadavg::LoadavgPlugin;
 
 fn main() {
-    let plugin = LoadavgPlugin {};
-    match plugin.run() {
-        Ok(_) => {}
-        Err(err) => {
-            eprintln!("mackerel-plugin-loadavg: {}", err);
-            std::process::exit(1);
-        }
+    if let Err(err) = (LoadavgPlugin {}).run() {
+        eprintln!("mackerel-plugin-loadavg: {}", err);
+        std::process::exit(1);
     }
 }
